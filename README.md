@@ -1,2 +1,12 @@
-# ansible
-My Ansible Configuration when I'm on a new PC etc.
+# Ansible
+My Ansible Configuration
+
+## Install Ansible
+```bash
+dnf install ansible
+```
+
+## Pull Ansible Configuration
+```bash
+sudo ansible--pull -U https://github.com/scrythe/ansible.git
+```

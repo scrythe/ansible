@@ -1,0 +1,13 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Install git
+      dnf: name=git
+    - name: Install nodejs
+      dnf:
+        name: ['nodejs', 'npm']
+    - name: Install neovim
+      dnf: name=neovim
+    - name: Install tmux
+      dnf: name=tmux
+
