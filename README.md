@@ -1,12 +1,12 @@
 # Ansible
 My Ansible Configuration
 
-## Install Ansible
+## Install Ansible and Git
 ```bash
-dnf install ansible
+dnf install ansible git
 ```
 
 ## Pull Ansible Configuration
 ```bash
-sudo ansible--pull -U https://github.com/scrythe/ansible.git
+sudo ansible-pull -U https://github.com/scrythe/ansible.git
 ```

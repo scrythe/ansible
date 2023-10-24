@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-sudo docker build -t ansible .
+docker build -t ansible .
 

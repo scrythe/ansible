@@ -2,6 +2,6 @@ FROM fedora
 
 WORKDIR /app
 
-RUN dnf install -y ansible
+RUN dnf install -y ansible git
 
 COPY ../ ./
