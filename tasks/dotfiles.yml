@@ -1,0 +1,4 @@
+- name: Copy dotfiles folder to $Home
+  shell: cp -r dotfiles ~/dotfiles
+- name: Stow dotfiles
+  shell: ~/dotfiles/stow.sh

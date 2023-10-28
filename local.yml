@@ -1,11 +1,5 @@
 - hosts: localhost
   become: true
   tasks:
-    - name: Install nodejs
-      dnf:
-        name: ['nodejs', 'npm']
-    - name: Install neovim
-      dnf: name=neovim
-    - name: Install tmux
-      dnf: name=tmux
-
+    - include: tasks/install.yml
+    - include_tasks: tasks/dotfiles.yml
