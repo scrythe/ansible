@@ -5,7 +5,13 @@
   dnf: name=neovim
 - name: Install tmux
   dnf: name=tmux
+- name: Install tmp
+  ansible.builtin.git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: ~/.tmux/plugins/tpm
 - name: Install C Compiler for treesitter
   dnf: name=gcc
+- name: Install fzf
+  dnf: name=fzf
 - name: Install stow
   dnf: name=stow

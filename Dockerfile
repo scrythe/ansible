@@ -4,4 +4,4 @@ WORKDIR /app
 
 RUN dnf install -y ansible git
 
-COPY ../ ./
+COPY . .
