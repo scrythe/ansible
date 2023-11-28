@@ -35,4 +35,25 @@ require("lazy").setup({
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { 'nvim-lualine/lualine.nvim', requires = { 'nvim-tree/nvim-web-devicons', opt = true } },
     {'lewis6991/gitsigns.nvim'},
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
+    },
+    {'sbdchd/neoformat'},
+    {
+        'numToStr/Comment.nvim',
+        opts = {
+            -- add any options here
+        },
+        lazy = false,
+    },
+    {"mfussenegger/nvim-dap"},
+    -- {"mxsdev/nvim-dap-vscode-js", requires={"mfussenegger/nvim-dap"}},
+    -- {
+    --     "microsoft/vscode-js-debug",
+    --       opt = true,
+    --       run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out" 
+    -- },
+    { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 })

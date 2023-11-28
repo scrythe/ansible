@@ -29,3 +29,10 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.cmd("set clipboard+=unnamedplus")
+
+vim.cmd([[
+  augroup NeoformatAutoCmd
+    autocmd!
+    autocmd BufWritePre *.js,*.html,*.ts,*.tsx,*.php,*.json,*.css,*.py Neoformat
+  augroup END
+]])
