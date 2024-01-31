@@ -1,4 +1,4 @@
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 vim.opt.relativenumber = true
 
 -- vim.opt.cursorline = true
@@ -12,3 +12,5 @@ vim.opt.expandtab = true
 
 -- vim.cmd [[ set termguicolors ]]
 vim.opt.colorcolumn = "80"
+
+vim.cmd("set clipboard+=unnamedplus")
