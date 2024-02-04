@@ -54,9 +54,6 @@ return {
 		require("dap-vscode-js").setup({
 			debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
 			adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
-			-- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
-			-- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
-			-- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
 		})
 
 		for _, language in ipairs(js_based_languages) do
@@ -104,42 +101,6 @@ return {
 					sourceMaps = true,
 					userDataDir = false,
 				},
-				-- {
-				-- name = "Debug tsx",
-				-- type = "pwa-node",
-				-- request = "launch",
-				-- program = "${file}",
-				-- cwd = vim.fn.getcwd(),
-				-- runtimeExecutable = "${workspaceFolder}/apps/backend/node_modules/.bin/tsx",
-				-- sourceMaps = true,
-				-- console = "integratedTerminal",
-				-- internalConsoleOptions = "neverOpen",
-				-- skipFiles = {
-				-- "<node_internals>/**",
-				-- "${workspaceFolder}/node_modules/**",
-				-- },
-				-- },
-				-- launch.jso version
-				-- {
-				-- "version": "0.2.0",
-				-- "configurations": [
-				-- {
-				-- "name": "tsx yeet",
-				-- "type": "pwa-node",
-				-- "request": "launch",
-				-- "program": "${file}",
-				-- "runtimeExecutable": "${workspaceFolder}/apps/backend/node_modules/.bin/tsx",
-				-- "sourceMaps": true,
-				-- "console": "integratedTerminal",
-				-- "internalConsoleOptions": "neverOpen",
-				-- "skipFiles": [
-				-- "<node_internals>/**",
-				-- "${workspaceFolder}/node_modules/**"
-				-- ],
-				-- "cwd": "${workspaceFolder}"
-				-- }
-				-- ]
-				-- }
 				-- Divider for the launch.json derived configs
 				{
 					name = "----- ↓ launch.json configs ↓ -----",
