@@ -8,6 +8,10 @@ return {
 	config = function()
 		require("nvim-tree").setup({
 			view = { relativenumber = true },
+			update_focused_file = {
+				enable = true,
+				update_root = false,
+			},
 		})
 		vim.keymap.set("n", "<leader>e", "<cmd>:NvimTreeToggle<CR>")
 	end,

@@ -14,3 +14,5 @@ vim.opt.expandtab = true
 vim.opt.colorcolumn = "80"
 
 vim.cmd("set clipboard+=unnamedplus")
+
+vim.keymap.set("i", "<C-c>", "<ESC>", {})
