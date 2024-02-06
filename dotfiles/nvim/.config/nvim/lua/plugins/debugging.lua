@@ -43,14 +43,14 @@ return {
       "typescriptreact",
       "javascriptreact",
     }
-    vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, {})
-    vim.keymap.set("n", "<leader>dc", dap.continue, {})
-    vim.keymap.set("n", "<leader>di", dap.step_into, {})
-    vim.keymap.set("n", "<leader>do", dap.step_out, {})
-    vim.keymap.set("n", "<leader>dO", dap.step_over, {})
-    vim.keymap.set("n", "<leader>dt", dap.terminate, {})
-    vim.keymap.set("n", "<leader>du", dapui.toggle, {})
-    vim.keymap.set("n", "<leader>de", dapui.eval, {})
+    vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Dap Continue" })
+    vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Dap Stepinto" })
+    vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Dap Stepout" })
+    vim.keymap.set("n", "<leader>dO", dap.step_over, { desc = "Dap Stepover" })
+    vim.keymap.set("n", "<leader>dt", dap.terminate, { desc = "Terminate Dap Session" })
+    vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle DapUi" })
+    vim.keymap.set("n", "<leader>de", dapui.eval, { desc = "Dap eval" })
     vim.keymap.set("n", "<leader>da", function()
       if vim.fn.filereadable(".vscode/launch.json") then
         local dap_vscode = require("dap.ext.vscode")
@@ -60,7 +60,7 @@ return {
         })
       end
       dap.continue()
-    end)
+    end, { desc = "Dap with Args" })
 
     require("dap-vscode-js").setup({
       debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),

@@ -8,13 +8,13 @@ return {
           delay = 0,
         },
       })
-      vim.keymap.set("n", "gp", "<cmd>Gitsigns preview_hunk_inline<CR>", {})
+      vim.keymap.set("n", "gp", "<cmd>Gitsigns preview_hunk_inline<CR>", { desc = "Git preview Hunk" })
     end,
   },
   {
     "tpope/vim-fugitive",
     config = function()
-      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+      vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Open Git Fugitive Window" })
     end,
   },
 }

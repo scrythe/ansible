@@ -13,6 +13,6 @@ return {
 				update_root = false,
 			},
 		})
-		vim.keymap.set("n", "<leader>e", "<cmd>:NvimTreeToggle<CR>")
+		vim.keymap.set("n", "<leader>e", "<cmd>:NvimTreeToggle<CR>", { desc = "Open File Tree" })
 	end,
 }

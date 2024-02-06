@@ -15,10 +15,12 @@ vim.opt.colorcolumn = "80"
 
 vim.cmd("set clipboard+=unnamedplus")
 
-vim.keymap.set("i", "<C-c>", "<ESC>", {})
+vim.keymap.set("i", "<C-c>", "<ESC>")
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
+
+vim.keymap.set("x", "<leader>p", [["_dP]])
