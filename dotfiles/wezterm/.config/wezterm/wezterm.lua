@@ -11,6 +11,15 @@ config.color_scheme = "catppuccin-mocha"
 config.use_fancy_tab_bar = false
 config.status_update_interval = 1000
 
+config.default_prog = { "/usr/bin/zsh" }
+
+-- local success, stdout, stderr = wezterm.run_child_process { 'find ~/projects ~/coding_lessons ~/godot-games -mindepth 1 -maxdepth 1 -type d' }
+-- local success, stdout, stderr = wezterm.run_child_process({ "ls", "-l" })
+--
+-- wezterm.log_info(success)
+-- wezterm.log_info(stdout)
+-- wezterm.log_info(stderr)
+
 wezterm.on("update-right-status", function(window, pane)
 	local stat = window:active_workspace()
 
@@ -66,6 +75,70 @@ config.keys = {
 		key = "4",
 		mods = "CTRL",
 		action = wezterm.action.ActivateTab(3),
+	},
+	{
+		key = "s",
+		mods = "CTRL|SHIFT",
+		action = act.SwitchToWorkspace({
+			name = "monitoring",
+		}),
+	},
+	{
+		key = "9",
+		mods = "ALT",
+		action = act.ShowLauncherArgs({
+			flags = "FUZZY|WORKSPACES",
+		}),
+	},
+	{
+		key = "S",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action_callback(function(window, pane)
+			-- Here you can dynamically construct a longer list if needed
+
+			local home = wezterm.home_dir
+			local _, folderPathsString = wezterm.run_child_process({
+				"find",
+				home .. "/projects",
+				home .. "/coding_lessons",
+				home .. "/godot-games",
+				"-mindepth",
+				"1",
+				"-maxdepth",
+				"1",
+				"-type",
+				"d",
+			})
+			local workspaces = { { id = home, label = "default" } }
+			for folderPath in folderPathsString:gmatch("[^\n]+") do
+				table.insert(workspaces, { id = folderPath, label = folderPath })
+			end
+
+			window:perform_action(
+				act.InputSelector({
+					action = wezterm.action_callback(function(inner_window, inner_pane, id,label)
+						label = label:match("([^/]+)$")
+						wezterm.log_info("id = " .. id)
+						wezterm.log_info("label = " .. label)
+						inner_window:perform_action(
+							act.SwitchToWorkspace({
+								name = label,
+								spawn = {
+									label = "Workspace: " .. label,
+									cwd = id,
+								},
+							}),
+							inner_pane
+						)
+					end),
+					title = "Choose Workspace",
+					choices = workspaces,
+					fuzzy = true,
+					fuzzy_description = "Fuzzy find and/or make a workspace: ",
+				}),
+				pane
+			)
+		end),
 	},
 }
 
