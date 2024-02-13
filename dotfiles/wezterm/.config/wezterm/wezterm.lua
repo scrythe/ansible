@@ -48,12 +48,12 @@ config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	{
 		key = "t",
-		mods = "CTRL",
+		mods = "LEADER",
 		action = act.SpawnTab("CurrentPaneDomain"),
 	},
 	{
 		key = "w",
-		mods = "CTRL",
+		mods = "LEADER",
 		action = act.CloseCurrentTab({ confirm = false }),
 	},
 	{
