@@ -7,7 +7,7 @@ return {
 	},
 	config = function()
 		require("nvim-tree").setup({
-			view = { relativenumber = true },
+			view = { number = true, relativenumber = true },
 			update_focused_file = {
 				enable = true,
 				update_root = false,
