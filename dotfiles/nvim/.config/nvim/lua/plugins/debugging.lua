@@ -13,6 +13,7 @@ return {
       "Joakker/lua-json5",
       build = "./install.sh",
     },
+    "leoluz/nvim-dap-go",
     {
       "theHamsta/nvim-dap-virtual-text",
       opts = {},
@@ -66,6 +67,8 @@ return {
       debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
       adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
     })
+
+    require("dap-go").setup()
 
     for _, language in ipairs(js_based_languages) do
       dap.configurations[language] = {

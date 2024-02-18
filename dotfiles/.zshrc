@@ -111,4 +111,5 @@ bindkey -s "^f" "fzfProj\n"
 # alias wezterm='flatpak run org.wezfurlong.wezterm'
 eval "$(zoxide init zsh)"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/home/scrythe/go/bin
 bindkey '^[[Z'   autosuggest-accept

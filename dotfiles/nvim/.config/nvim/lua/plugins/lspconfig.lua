@@ -8,7 +8,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "tsserver", "html" },
+      ensure_installed = { "lua_ls", "tsserver", "html", "gopls" },
     },
   },
   {
@@ -21,6 +21,7 @@ return {
       lspconfig.lua_ls.setup({ capabilities = capabilities })
       lspconfig.tsserver.setup({ capabilities = capabilities })
       lspconfig.html.setup({ capabilities = capabilities })
+      lspconfig.gopls.setup({ capabilities = capabilities })
 
       vim.diagnostic.config({
         severity_sort = true,
