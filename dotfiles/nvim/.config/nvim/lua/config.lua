@@ -25,4 +25,3 @@ vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
-

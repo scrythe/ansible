@@ -8,7 +8,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "tsserver", "html", "gopls" },
+      ensure_installed = { "lua_ls", "tsserver", "html", "gopls", "rust_analyzer" },
     },
   },
   {

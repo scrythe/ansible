@@ -8,6 +8,7 @@ return {
       version = "1.*",
     },
     "rcarriga/nvim-dap-ui",
+    "nvim-neotest/nvim-nio",
     "mxsdev/nvim-dap-vscode-js",
     {
       "Joakker/lua-json5",
@@ -37,6 +38,7 @@ return {
     dap.listeners.before.event_exited.dapui_config = function()
       dapui.close()
     end
+    -- dapui.widgets'.centered_float(require'dap.ui.widgets'.frames)
 
     local js_based_languages = {
       "typescript",
@@ -45,6 +47,9 @@ return {
       "javascriptreact",
     }
     vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+    vim.keymap.set("n", "<leader>dB", function()
+      dap.toggle_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end, { desc = "Toggle Breakpoint Condition" })
     vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Dap Continue" })
     vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Dap Stepinto" })
     vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Dap Stepout" })
@@ -62,13 +67,36 @@ return {
       end
       dap.continue()
     end, { desc = "Dap with Args" })
+    dap.defaults.codelldb.exception_breakpoints = { 'rust_panic' }
 
     require("dap-vscode-js").setup({
       debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
       adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
     })
 
+    require('dap.ext.vscode').load_launchjs(nil, { codelldb = { 'rust' } })
+    -- for name, configuration_entries in pairs(dap.configurations) do
+    --   if pre_launch[name] == nil or not vim.deep_equal(pre_launch[name], configuration_entries) then
+    --     -- `configurations` are tables of `configuration` entries
+    --     -- use the first `configuration` that matches
+    --     for _, entry in pairs(configuration_entries) do
+    --       ---@cast entry DapClientConfig
+    --       if entry.type == type then
+    --         dap_config = entry
+    --         break
+    --       end
+    --     end
+    --   end
+    -- end
+
     require("dap-go").setup()
+
+
+    -- dap.adapters.lldb = {
+    --   type = 'executable',
+    --   command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+    --   name = 'lldb'
+    -- }
 
     for _, language in ipairs(js_based_languages) do
       dap.configurations[language] = {
