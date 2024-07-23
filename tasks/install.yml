@@ -1,17 +1,50 @@
 - name: Install nodejs
-  dnf:
-    name: ['nodejs', 'npm']
+  pacman:
+    name: ["npm"]
+  tags:
+    - install
+    - node
+- name: Install Go
+  pacman: name=go
+  tags:
+    - install
+    - go
+- name: Install zsh
+  pacman: name=zsh
+  tags:
+    - install
+    - zsh
+
+- name: Install ohmyzsh
+  #   # shell: sh bla.zsh
+  #   # shell: export SHELL=2
+  #   # zsh=$(command -v zsh)
+  # shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # shell: |
+  # shell: script -qc 'sh bla.sh' <<< y
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/read -r opt/d' '/-t 0/{N;N;N;d}' | sed '/-t 0/{N;N;N;d}' ./install.sh)"
+  # shell: sh bla.zsh # shell: |
+  #   #   curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o /tmp/install.sh
+  #   #   sed -e '/read -r opt/d' /tmp/install.sh
+  tags:
+    - install
+    - zsh
+
+- name: Install Rust
+  shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  tags:
+    - install
+    - rust
 - name: Install neovim
-  dnf: name=neovim
-- name: Install tmux
-  dnf: name=tmux
-- name: Install tmp
-  ansible.builtin.git:
-    repo: 'https://github.com/tmux-plugins/tpm'
-    dest: ~/.tmux/plugins/tpm
-- name: Install C Compiler for treesitter
-  dnf: name=gcc
-- name: Install fzf
-  dnf: name=fzf
-- name: Install stow
-  dnf: name=stow
+  pacman: name=neovim
+  tags:
+    - install
+    - neovim
+- name: Install wezterm
+  pacman: name=wezterm
+  tags:
+    - install
+    - wezterm
+# - name: Install C Compiler for treesitter
+#   dnf: name=gcc
+# - name: Install fzf
+#   dnf: name=fzf

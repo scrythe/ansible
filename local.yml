@@ -1,5 +1,5 @@
 - hosts: localhost
-  become: true
+  become_user: true
   tasks:
-    - include_tasks: tasks/install.yml
-    - include_tasks: tasks/dotfiles.yml
+    - import_tasks: tasks/install.yml
+    - import_tasks: tasks/dotfiles.yml

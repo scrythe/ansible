@@ -1,4 +1,13 @@
+- name: Install stow
+  pacman: name=stow
+  tags:
+    - install
+    - dotfiles
 - name: Copy dotfiles folder to $Home
   shell: cp -r dotfiles ~/dotfiles
+  tags:
+    - dotfiles
 - name: Stow dotfiles
   shell: ~/dotfiles/stow.sh
+  tags:
+    - dotfiles
