@@ -9,26 +9,34 @@
   tags:
     - install
     - go
+- name: hello
+  shell: echo {{ user }}
+  tags:
+    - install
+    - zsh
 - name: Install zsh
   pacman: name=zsh
   tags:
     - install
     - zsh
-
-- name: Install ohmyzsh
-  #   # shell: sh bla.zsh
-  #   # shell: export SHELL=2
-  #   # zsh=$(command -v zsh)
-  # shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" # shell: |
-  # shell: script -qc 'sh bla.sh' <<< y
-  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sed '/read -r opt/d' '/-t 0/{N;N;N;d}' | sed '/-t 0/{N;N;N;d}' ./install.sh)"
-  # shell: sh bla.zsh # shell: |
-  #   #   curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o /tmp/install.sh
-  #   #   sed -e '/read -r opt/d' /tmp/install.sh
+- name: Change default shell to zsh
+  shell: chsh -s $(command -v zsh)
   tags:
     - install
     - zsh
-
+- name: Check ohmyzsh
+  stat: 
+    path: ~/.oh-my-zsh
+  register: oh_my_stats
+  tags:
+    - install
+    - zsh
+- name: Install ohmyzsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  when: oh_my_stats.stat.exists == False
+  tags:
+    - install
+    - zsh
 - name: Install Rust
   shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   tags:
@@ -44,7 +52,13 @@
   tags:
     - install
     - wezterm
-# - name: Install C Compiler for treesitter
-#   dnf: name=gcc
-# - name: Install fzf
-#   dnf: name=fzf
+- name: Install C Compiler
+  pacman: name=gcc
+  tags:
+    - install
+    - c
+- name: Install fzf
+  pacman: name=fzf
+  tags:
+    - install
+    - fzf

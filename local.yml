@@ -1,5 +1,6 @@
 - hosts: localhost
-  become_user: true
+  become: true
+  become_user: "{{ user }}"
   tasks:
     - import_tasks: tasks/install.yml
     - import_tasks: tasks/dotfiles.yml
