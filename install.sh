@@ -1,7 +1,7 @@
 # pacman -Syu --noconfirm
 
 # pacman -S base base-devel linux linux-firmware networkmanager vim
-pacman -S --noconfirm ansible git sudo vim
+# pacman -S --noconfirm ansible git sudo vim
 
 # passwd
 #
@@ -11,5 +11,4 @@ passwd scrythe
 
 vim /etc/sudoers
 
-# ansible-playbook local.yml -e "user=$(whoami)"
-# ansible-playbook local.yml -e "user=$(whoami)" -t zsh -v
+# ansible-playbook local.yml -e "user=$(whoami)" -K

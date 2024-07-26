@@ -5,9 +5,12 @@
     - dotfiles
 - name: Copy dotfiles folder to $Home
   shell: cp -r dotfiles ~/dotfiles
+  become_user: "{{ user }}"
+
   tags:
     - dotfiles
 - name: Stow dotfiles
   shell: ~/dotfiles/stow.sh
+  become_user: "{{ user }}"
   tags:
     - dotfiles

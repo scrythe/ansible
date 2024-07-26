@@ -9,36 +9,34 @@
   tags:
     - install
     - go
-- name: hello
-  shell: echo {{ user }}
-  tags:
-    - install
-    - zsh
 - name: Install zsh
   pacman: name=zsh
   tags:
     - install
     - zsh
 - name: Change default shell to zsh
-  shell: chsh -s $(command -v zsh)
+  shell: chsh -s $(grep '^/.*/zsh$' "/etc/shells" | tail -n 1) {{ user }}
   tags:
     - install
     - zsh
 - name: Check ohmyzsh
-  stat: 
+  stat:
     path: ~/.oh-my-zsh
   register: oh_my_stats
+  become_user: "{{ user }}"
   tags:
     - install
     - zsh
 - name: Install ohmyzsh
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   when: oh_my_stats.stat.exists == False
+  become_user: "{{ user }}"
   tags:
     - install
     - zsh
 - name: Install Rust
   shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  become_user: "{{ user }}"
   tags:
     - install
     - rust
