@@ -1,20 +1,4 @@
-# My Arch Windows Dualboot Setup
-
-## Windows Setup
-
-Installing Windows 10 because it's nicer
-
-https://www.microsoft.com/de-de/software-download/windows10
-
-Link to KDE ISO Image Writer for Windows (Balena Etcher aparrently not good)
-
-https://apps.kde.org/isoimagewriter/
-
-Use diskpart.exe if problems to write on usb disk
-
-Disable Secure Boot
-
-Fast Startup and hibernation
+# My Arch Setup
 
 ## Setup
 
@@ -29,6 +13,18 @@ Link to Arch ISO with Guide and Verification
 https://archlinux.org/download/
 
 Adittional Chekcs with
+
+pacman-key -v archlinux-version-x86_64.iso.sig
+
+Link to KDE ISO Image Writer for Windows (Balena Etcher aparrently not good)
+
+https://apps.kde.org/isoimagewriter/
+
+Use diskpart.exe if problems to write on usb disk (deleting partitions etc.)
+
+Disable Secure Boot and make sure RAID SSD thing stuff
+
+### Live USB
 
 set keyboard german keyboard layout
 
@@ -166,6 +162,12 @@ For example formatting Linux filesystem to ext4
 mkfs.ext4 /dev/root_partition
 ```
 
+Formatting EFI system partition
+
+```
+mkfs.fat -F 32 /dev/efi_system_partition
+```
+
 #### Mounting the filesystems
 
 mount root volume to /mnt
@@ -174,11 +176,10 @@ mount root volume to /mnt
 mount /dev/root_partition /mnt
 ```
 
-mount the EFI system partition and XBOOTLDR
+mount the EFI system partition
 
 ```
-mount --mkdir /dev/efi_system_partition /mnt/efi
-mount --mkdir /dev/xbootldr_partition /mnt/boot
+mount --mkdir /dev/efi_system_partition /mnt/boot
 ```
 
 ## Installation
@@ -284,12 +285,6 @@ pacman -S openssh
 systemctl enable sshd
 ```
 
-install linux-lts as failsave incase error
-
-```
-pacman -S linux-lts
-```
-
 checking GPU and looking up version
 on https://www.nvidia.com/Download/driverResults.aspx/228545/en-us/
 
@@ -348,7 +343,7 @@ Use bootctl to install systemd-boot to the ESP
 bootctl install
 ```
 
-configuring systemd-boot (esp in this case efi)
+configuring systemd-boot (esp in this case boot)
 
 ```
 vim esp/loader/loader.conf
@@ -359,10 +354,29 @@ default arch.conf
 timeout 0
 ```
 
+adding arch config to entry (options can also be root=/dev/root_partition rw)
+
+```
+vim esp/loader/entries/arch.conf
+
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /initramfs-linux.img
+options root=UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx rw
+```
+
 exit, unmount all the partitions and restart the machine
 
 ```
 exit
 umount -R /mnt
 reboot
+```
+
+### Post-Installation
+
+connecting to internet
+
+```
+nmcli device wifi connect SSID password passowrd
 ```
