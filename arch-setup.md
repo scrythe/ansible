@@ -1,6 +1,34 @@
-# My Arch Setup
+# My Arch Windows Dualboot Setup
+
+## Windows Setup
+
+Installing Windows 10 because it's nicer
+
+https://www.microsoft.com/de-de/software-download/windows10
+
+Link to KDE ISO Image Writer for Windows (Balena Etcher aparrently not good)
+
+https://apps.kde.org/isoimagewriter/
+
+Use diskpart.exe if problems to write on usb disk
+
+Disable Secure Boot
+
+Fast Startup and hibernation
 
 ## Setup
+
+### Pre-installation
+
+Link to qBittorrent (Bittorrent aparrently not good)
+
+https://www.qbittorrent.org/download
+
+Link to Arch ISO with Guide and Verification
+
+https://archlinux.org/download/
+
+Adittional Chekcs with
 
 set keyboard german keyboard layout
 
