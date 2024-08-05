@@ -1,5 +1,6 @@
 return {
   "folke/which-key.nvim",
+  dependencies = { { "echasnovski/mini.nvim", version = false } },
   event = "VeryLazy",
   init = function()
     vim.o.timeout = true
@@ -7,22 +8,37 @@ return {
   end,
   config = function()
     local wk = require("which-key")
-    wk.register({
-      ["<leader>"] = {
-        f = { name = "+find" },
-        d = { name = "+debug" },
-        g = { name = "+git/format" },
-        l = { name = "+rename" },
+    wk.add({
+      { "<leader>d", group = "debug" },
+      { "<leader>f", group = "find" },
+      { "<leader>g", group = "git/format" },
+      { "<leader>l", group = "rename" },
+    })
+    wk.add({
+      mode = { "v" },
+      { "<leader>s", group = "Silicon" },
+      {
+        "<leader>sc",
+        function()
+          require("nvim-silicon").clip()
+        end,
+        desc = "Copy code screenshot to clipboard",
+      },
+      {
+        "<leader>sf",
+        function()
+          require("nvim-silicon").file()
+        end,
+        desc = "Save code screenshot as file",
+      },
+      {
+        "<leader>ss",
+        function()
+          require("nvim-silicon").shoot()
+        end,
+        desc = "Create code screenshot",
       },
     })
-    wk.register({
-      ['s'] = {
-        name = "Silicon",
-        ['s'] = { function() require("nvim-silicon").shoot() end, "Create code screenshot" },
-        ['f'] = { function() require("nvim-silicon").file() end, "Save code screenshot as file" },
-        ['c'] = { function() require("nvim-silicon").clip() end, "Copy code screenshot to clipboard" },
-      },
-    }, { prefix = "<leader>", mode = "v" })
   end,
   opts = {
     -- your configuration comes here
