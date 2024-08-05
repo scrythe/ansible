@@ -23,7 +23,7 @@ return {
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
-    require("plugins.dap.keybinds")(dap,dapui)
+    require("plugins.dap.keybinds")(dap, dapui)
 
     dapui.setup()
 
